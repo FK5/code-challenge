@@ -7,13 +7,13 @@ import Datatable from 'react-bs-datatable';
 const DataTable = (users) => {
     // let u = users
     // console.log(users.users[0]);
-    let u={id: '', name: '', email:''};
-    for (const user in users.users) {
-        u.id = user['id'];
-        // users.users.forEach(element => {u.id = element.id ; u.name=element.name; u.email= element.email});
-      }
+    // let u={id: '', name: '', email:''};
+    // for (const user in users.users) {
+    //     u.id = user['id'];
+    //     // users.users.forEach(element => {u.id = element.id ; u.name=element.name; u.email= element.email});
+    //   }
     // users.users.forEach(element => {u.id = element.id ; u.name=element.name; u.email= element.email});
-    console.log(u);
+    // console.log(u);
     const header = [
         { title: 'ID', prop: 'id' },
         { title: 'Name', prop: 'realname' },
