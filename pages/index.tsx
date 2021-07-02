@@ -1,6 +1,7 @@
 import Layout from "../layouts/Layout";
 import {useEffect, useState} from "react";
 import S3 from 'react-aws-s3';
+import Image from 'next/image'
 
 
 export default function Home() {
@@ -53,7 +54,7 @@ export default function Home() {
         <Layout auth={auth}>
             {message}
             <div className="card mt-5" style={{width: "18rem"}}>
-                <img className="card-img-top" src={imagelink} alt="Profile Image"/>
+                {/* <Image className="card-img-top" src={imagelink} alt="Profile Image"/> */}
                 <div className="card-body">
                     <form onSubmit={uploadImage}>
                         <label className="form-label" htmlFor="customFile">Upload Image</label>
