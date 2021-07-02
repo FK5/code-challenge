@@ -8,6 +8,7 @@ import DataTable from "../../components/datatable";
 export default function Home() {
     const [content, setContent] = useState('');
     const [message, setMessage] = useState('');
+    const [url, setUrl] = useState('https://code-api-5500.herokuapp.com/api/admin/users20');
     const [auth, setAuth] = useState(false);
     const router = useRouter();
     const role = Cookies.get("user_role");
@@ -20,13 +21,12 @@ export default function Home() {
                     router.push('/');
                 }else{
                     try {
-                        const response = await fetch('http://localhost:8000/api/admin/users', {
+                        const response = await fetch(url, {
                             credentials: 'include',
                         });
 
                         // content = await response.json();
                         setContent(await response.json());
-                        
                         setMessage(`Hello`);
                         setAuth(true);
                     } catch (e) {
@@ -42,7 +42,8 @@ export default function Home() {
         <Layout auth={auth}>
             {message}
             {/* <IndexTableWithBulkActions users={content}></IndexTableWithBulkActions> */}
-            <DataTable users={content}></DataTable>
+            <DataTable users={content} func={setUrl}></DataTable>
+            {console.log(url)}
         </Layout>
         
     )

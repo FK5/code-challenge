@@ -8,7 +8,7 @@ const Layout = (props) => {
     const router = useRouter();
 
     const logout = async () => {
-        await fetch('http://localhost:8000/api/logout', {
+        await fetch('https://code-api-5500.herokuapp.com/api/logout', {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
             credentials: 'include',

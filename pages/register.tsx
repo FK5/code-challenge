@@ -1,17 +1,24 @@
-import React, {SyntheticEvent, useState} from 'react';
+import React, {SyntheticEvent, useState, useRef} from 'react';
 import Layout from "../layouts/Layout";
 import {useRouter} from "next/router";
+import ReCAPTCHA from "react-google-recaptcha";
 
 const Register = () => {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const router = useRouter();
+    const reRef = useRef<ReCAPTCHA>();
 
     const submit = async (e: SyntheticEvent) => {
         e.preventDefault();
 
-        await fetch('http://localhost:8000/api/register', {
+        const token = await reRef.current.executeAsync();
+        reRef.current.reset()
+
+        console.log(token)
+
+        await fetch('https://code-api-5500.herokuapp.com/api/register', {
             method: "POST",
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({
@@ -41,7 +48,12 @@ const Register = () => {
                        onChange={e => setPassword(e.target.value)}
                 />
 
-                <button className="w-100 btn btn-lg btn-primary" type="submit">Submit</button>
+                <ReCAPTCHA sitekey="6Letw24bAAAAABeG-o8kvS3YL6otZWvhOt4HMApy"
+                    size="invisible" 
+                    ref={reRef}
+                    />
+
+                <button className="w-100 btn btn-lg btn-primary mt-5" type="submit">Submit</button>
             </form>
         </Layout>
     );
