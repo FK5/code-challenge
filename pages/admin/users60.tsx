@@ -9,15 +9,11 @@ import Link from "next/link"
 export default function Home() {
     const [content, setContent] = useState('');
     const [message, setMessage] = useState('');
-    const [url, setUrl] = useState('https://code-api-5500.herokuapp.com/api/admin/users20');
+    const [url, setUrl] = useState('https://code-api-5500.herokuapp.coms/api/admin/users60');
     const [auth, setAuth] = useState(false);
     const router = useRouter();
     const role = Cookies.get("user_role");
 
-    // const [nbPages, setNbPages] = useState(0);dsd
-
-
-    
 
     useEffect(() => {
         
@@ -32,7 +28,6 @@ export default function Home() {
                             credentials: 'include',
                         });
 
-                        // content = await response.json();
                         setContent(await response.json());
                         setMessage(`Hello`);
                         setAuth(true);
@@ -48,7 +43,6 @@ export default function Home() {
         )();
 
     },[]);
-    // console.log(content)   
 
     const nbPages = content['last_page']
     const links = content['links']
@@ -72,13 +66,11 @@ export default function Home() {
     return (
         <Layout auth={auth}>
             {message}
-            {/* <button type="button" className="btn btn-primary">BUTTONNNN</button> */}
             <div className="mb-2">
                 <Link href="/admin"><button type="button" className="btn btn-primary btn-sm me-2">20 users</button></Link>
                 <Link href="/admin/users40"><button type="button" className="btn btn-primary btn-sm me-2">40 users</button></Link>
                 <Link href="/admin/users60"><button type="button" className="btn btn-primary btn-sm me-2">60 users</button></Link>
             </div>
-            {/* <IndexTableWithBulkActions users={content}></IndexTableWithBulkActions> */}
             <DataTable urls={url} users={content} parentCallback = {value => setUrl(value)}></DataTable>
             {items}
         </Layout>

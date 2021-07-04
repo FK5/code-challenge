@@ -9,7 +9,7 @@ import Link from "next/link"
 export default function Home() {
     const [content, setContent] = useState('');
     const [message, setMessage] = useState('');
-    const [url, setUrl] = useState('https://code-api-5500.herokuapp.com/api/admin/users20');
+    const [url, setUrl] = useState('https://code-api-5500.herokuapp.com/api/admin/users40');
     const [auth, setAuth] = useState(false);
     const router = useRouter();
     const role = Cookies.get("user_role");

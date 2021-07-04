@@ -8,6 +8,7 @@ export default function Home() {
     const [message, setMessage] = useState('');
     const [imagelink, setImagelink] = useState('');
     const [auth, setAuth] = useState(false);
+    
 
     const config = {
         bucketName: 'myBucket',
@@ -46,21 +47,31 @@ export default function Home() {
                     setMessage('You are not logged in');
                     setAuth(false);
                 }
-            }
+            } 
         )();
     },[]);
+
+    const imageComp = () => {
+        if(auth){
+            return(
+                <div className="card-body">
+                    <form onSubmit={uploadImage}>
+                        <label className="form-label" htmlFor="customFile">Upload Image</label>
+                        <Image src={'/...'} alt={'profile image'} width={400} height={400}/> {/* image link inside src atribute */}
+                        <input type="file" className="form-control" id="customFile" />
+                    </form>
+                </div>
+            )
+        }else{
+            return <div></div>
+        } 
+    }
 
     return (
         <Layout auth={auth}>
             {message}
             <div className="card mt-5" style={{width: "18rem"}}>
-                {/* <Image className="card-img-top" src={imagelink} alt="Profile Image"/> */}
-                <div className="card-body">
-                    <form onSubmit={uploadImage}>
-                        <label className="form-label" htmlFor="customFile">Upload Image</label>
-                        <input type="file" className="form-control" id="customFile" />
-                    </form>
-                </div>
+                {imageComp()}
             </div>
         </Layout>
     )
